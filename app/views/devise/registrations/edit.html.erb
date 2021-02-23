@@ -1,0 +1,62 @@
+<div class="main text-center mt-5">
+  <h2>ユーザー編集</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :ユーザー名%><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class:"col-3"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :お住いの地域 %><br />
+      <%= f.text_field :prefecture, autofocus: true, autocomplete: "prefecture" ,class: "col-3"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :メールアドレス %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class:"col-3"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :ユーザー画像 %><br />
+      <%= f.file_field :image, autofocus: true, autocomplete: "image" ,class: "col-3"%>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :パスワード %> <i>(変更しない場合は空白)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password" ,class:"col-3"%>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> 文字以上</em>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード確認 %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class:"col-3"%>
+    </div>
+
+    <div class="field">
+      <%= f.label :現在のパスワード %><br />
+      <%= f.password_field :current_password, autocomplete: "current-password" ,class:"col-3"%>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Update" ,class: "btn btn-primary col-3 mt-3"%>
+    </div>
+      <%= link_to("back","/users/#{current_user.id}",class: "btn btn-secondary col-3 mt-3")%>
+  <% end %>
+
+    <%if false%>
+    <h3>Cancel my account</h3>
+
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+    <%= link_to "Back", :back %>
+  <%end%>
+</div>

@@ -1,0 +1,32 @@
+<div class="main text-center">
+    <%= form_with(model: @blog, local: true) do |form| %>
+
+        <h1 class="mb-5">
+            今日の出来事を日記に書いてみましょう
+        </h1>
+
+        <div class="mb-5">
+            <%= form.label :タイトル %>
+            <%= form.text_field :title, class:"col-3"%>
+        </div>
+
+        <div class="content mb-5">
+            <%= form.label :内容 %>
+            <%= form.text_field :content , class:"col-3"%>
+        </div>
+
+        <div class="time mb-5">
+            <%= form.label :時間 %>
+            <%= form.datetime_select :start_time, class:"col-3 pl-5"%>
+        </div>
+
+        <div class="list">
+            <%= form.check_box :migraine, {} , true, false %>
+            <%= form.label :片頭痛%>
+        </div>
+    
+        <div class="submit">
+            <%= form.submit "作成", class:"btn btn-secondary col-3 mt-3" %>
+        </div>
+    <% end %>
+</div>

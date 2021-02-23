@@ -1,0 +1,61 @@
+<div class="weather text-right">
+    <% if @user.image%>
+        <img src=<%= @user.image %> class = "icon_image">
+    <% else%>
+        <p class="icon-image_default"></p>
+    <% end %>
+    <br>
+    <div class="container text-center">
+        <p class="fs-3"><%=@user.name%></p>
+        <%= link_to("ユーザ編集","/users/edit",class:"mt-3 btn btn-primary")%>
+        <br>
+        <%= link_to("カレンダー","/blogs/index",class:"mt-3 btn btn-secondary")%>
+    </div>
+</div>
+<h1 class="prefecture"><%=@user.prefecture+"の天気"%></h1>
+    <div id="weather">
+        <script>
+            $(function () {
+                var API_KEY = '<%=ENV['OPEN_WEATHER_MAP_API']%>'; 
+                var city = '<%=current_user.prefecture%>'; 
+                var url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + API_KEY;
+
+                $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: 'GET',
+                    })
+                    .done(function (data) {
+                        var insertHTML = '';
+                        var cityName = data.city.name;
+                        $('#city-name').html(cityName);
+                
+                        for (var i = 0; i <= 32; i = i + 8) {
+                            insertHTML += buildHTML(data, i);
+                        }
+                    $('#weather').html(insertHTML);
+                    })
+                    .fail(function (data) {
+                        alert('天気予報取得に失敗しました');
+                });
+            });
+            
+            
+            function buildHTML(data, i) {
+                var Week = new Array('(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)');
+                var date = new Date(data.list[i].dt_txt);
+                date.setHours(date.getHours() + 9);
+                var month = date.getMonth() + 1;
+                var day = month + '/' + date.getDate() + Week[date.getDay()];
+                var icon = data.list[i].weather[0].icon;
+                var html =
+                    '<div class="weather-report">' +
+                    '<img src="https://openweathermap.org/img/w/' + icon + '.png">' +
+                    '<span class="weather-date">' + day + "</span>" +
+                    '<div class="weather-temp-max">' + '最高：' + Math.round(data.list[i].main.temp_max) + "℃</div>" +
+                    '<span class="weather-temp-min">' + '最低：' + Math.floor(data.list[i].main.temp_min) + "℃</span>" +
+                    '</div>';
+                return html
+            }
+        </script>
+    </div>
