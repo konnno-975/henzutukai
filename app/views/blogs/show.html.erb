@@ -24,7 +24,7 @@
                 <% end %>
             </tr>
         </table>
-        <%= link_to 'Edit', edit_blog_path(@blog) ,class:"btn btn-primary col-3 mt-3" %><br>
-        <%= link_to 'destory',blog_path(@blog.id),method: :delete ,class:"btn btn-success col-3 mt-3",data: { confirm: '投稿を削除しますか？' } %><br>
-        <%= link_to 'Back', blogs_path, class:"btn btn-secondary col-3 mt-3"%>
+        <%= link_to '編集', edit_blog_path(@blog) ,class:"btn btn-primary col-3 mt-3" %><br>
+        <%= link_to '削除',blog_path(@blog.id),method: :delete ,class:"btn btn-success col-3 mt-3",data: { confirm: '投稿を削除しますか？' } %><br>
+        <%= link_to '戻る', blogs_path, class:"btn btn-secondary col-3 mt-3"%>
 </div>
