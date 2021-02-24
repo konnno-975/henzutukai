@@ -65,9 +65,4 @@ gem 'devise'          #日本語
 gem 'simple_calendar' #カレンダー
 gem 'carrierwave'     #画像
 gem 'dotenv-rails'    #環境変数
-
-#devise日本語化
-gem 'devise-i18n'     
-gem 'devise-i18n-views'
-
 gem 'jquery-rails'

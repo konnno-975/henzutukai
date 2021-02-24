@@ -1,5 +1,5 @@
 <div class="weather text-right">
-    <% if @user.image%>
+    <% if @user.image.present?%>
         <img src=<%= @user.image %> class = "icon_image">
     <% else%>
         <p class="icon-image_default"></p>
